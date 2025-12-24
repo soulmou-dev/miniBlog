@@ -3,16 +3,61 @@
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/css/style.css' />
+    <link rel='stylesheet' href='/css/main.css' />
+    {{#if styles}}
+      {{#each styles}}
+        <link rel='stylesheet' href='/css/{{this}}' />
+      {{/each}}
+    {{/if}}
   </head>
-  <body>
+<body>
+  <div class="layout" id="layout">
+    
+    <!-- HEADER -->
     {{> header}}
-
-    <main class="container">
-        {{{body}}}
-       
+    
+    <!-- SIDEBAR --> 
+    {{> aside}}
+    
+     <!-- MAIN -->
+    <main>
+      {{{body}}}
     </main>
 
+    <!-- FOOTER -->
     {{> footer}}
+
+  </div>
+    <script>
+      const layout = document.getElementById("layout");
+      const header = document.querySelector("header");
+      const burger = document.getElementById("burger");
+	    const sidebar = document.getElementById("sidebar");
+      const closeBtn = document.querySelector(".close-sidebar");
+      const menuToggle = document.getElementById("menuToggle");
+      const navMenu = document.getElementById("navMenu");
+      
+	    // Toggle menu
+      burger.addEventListener("click", () => {
+        if (window.innerWidth <= 768) {
+          sidebar.classList.toggle("open");
+        } else {
+          layout.classList.toggle("collapsed");
+        }
+      });
+	  
+	    closeBtn.addEventListener("click", () => {
+	      sidebar.classList.remove("open");
+	    });
+	
+	    menuToggle.addEventListener("click", () => {
+		    navMenu.classList.toggle("open");
+		    menuToggle.classList.toggle("open");
+	    });
+	  
+	    window.addEventListener("scroll", () => {
+		    header.classList.toggle("scrolled", window.scrollY > 5);
+	    });
+    </script>
   </body>
 </html>
