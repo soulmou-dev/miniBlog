@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Facades\Hash;
 
 return new class extends Migration
 {
@@ -36,6 +38,16 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        // Création de l'utilisateur admin
+            DB::table('users')->insert([
+                'id' => Uuid::uuid7()->toString(),
+                'email' => 'admin@miniblog.local',
+                'password' => Hash::make('123456'),
+                'lastName' => 'admin',
+                'firstName' => 'admin',
+                'role' => 'ROLE_ADMIN'
+            ]);
     }
 
     /**
