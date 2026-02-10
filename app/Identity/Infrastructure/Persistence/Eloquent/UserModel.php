@@ -15,6 +15,10 @@ final class UserModel extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'users';
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
+    public $incrementing = false;
+
     
     /**
      * The attributes that are mass assignable.
@@ -36,6 +40,7 @@ final class UserModel extends Authenticatable
         'password',
         'remember_token',
     ];
+
 
     /**
      * Get the attributes that should be cast.
