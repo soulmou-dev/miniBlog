@@ -7,6 +7,7 @@ final class CreateUserCommand
     public function __construct(
         public readonly string $email,
         public readonly string $password,
+        public readonly string $passwordConfirmation,
         public readonly string $lastName,
         public readonly string $firstName
     ) {}
@@ -16,8 +17,9 @@ final class CreateUserCommand
         return new self(
             $data['email'],
             $data['password'],
-            $data['lastName'],
-            $data['emafirstNameil']
+            $data['password_confirmation'],
+            $data['last_name'],
+            $data['first_name']
         );
     }
 }

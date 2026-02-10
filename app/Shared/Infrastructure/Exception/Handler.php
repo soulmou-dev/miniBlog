@@ -18,6 +18,7 @@ class Handler extends ExceptionHandler
         'BAD_REQUEST'       => 400,
         'CONFLICT'          => 409,
         'INVALID_TYPE'      => 422,
+        'VALIDATION_ERROR'  => 422,
         'DOMAIN_VIOLATION'  => 403,
         'NOT_FOUND'         => 404,
     ];

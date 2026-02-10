@@ -6,6 +6,7 @@ use App\Identity\Application\Command\CreateUserCommand;
 use App\Identity\Application\Security\PasswordHasherInterface;
 use App\Identity\Domain\Entity\User;
 use App\Identity\Domain\Exception\UserAlreadyExistsException;
+use App\Identity\Domain\Exception\ValidationPasswordException;
 use App\Identity\Domain\Repository\UserRepositoryInterface;
 use App\Identity\Domain\ValueObject\FirstName;
 use App\Identity\Domain\ValueObject\LastName;
@@ -22,8 +23,12 @@ final class CreateUserHandler
 
     public function __invoke( CreateUserCommand $command): void
     {
+        if($command->password !== $command->passwordConfirmation){
+            throw new ValidationPasswordException();
+        }
+
         if($this->repository->existsByEmail($command->email)){
-            throw new UserAlreadyExistsException();
+            throw new UserAlreadyExistsException('Email déjà utilisé');
         }
 
         $user = new User(
