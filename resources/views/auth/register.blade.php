@@ -36,7 +36,7 @@
          
         <!-- Prénom -->
         <div>
-            <label class="block text-gray-700">Nom</label>
+            <label class="block text-gray-700">Prénom</label>
             <input type="text" name="first_name" value="{{ old('first_name') }}" 
                    class="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring focus:ring-blue-300"
                    required>
