@@ -8,8 +8,7 @@
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen">
-
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
     <!-- Header / Navbar -->
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,7 +38,7 @@
     </header>
 
     <!-- Main content -->
-    <main class="py-8">
+    <main class="py-8 flex-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- @if(session('success'))
                 <div class="mb-4 p-4 bg-green-100 text-green-800 rounded">
