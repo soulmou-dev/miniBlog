@@ -13,7 +13,7 @@ class Handler extends ExceptionHandler
 {
         private array $httpStatusMap = [
         'BAD_REQUEST'       => 400,
-        'CONFLICT'          => 409,
+        'CONFLIT'          => 409,
         'INVALID_TYPE'      => 422,
         'VALIDATION_ERROR'  => 422,
         'DOMAIN_VIOLATION'  => 403,
@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
 
                 case 'INVALID_TYPE':
                 case 'BAD_REQUEST':
-                case 'CONFLICT':
+                case 'CONFLIT':
                 case 'VALIDATION_ERROR':
                 case 'DOMAIN_VIOLATION':
                     // On Retourne la page précédente avec les erreurs
