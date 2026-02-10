@@ -29,7 +29,16 @@ final class User
         ?DateTimeImmutable $createdAt = null,
         ?DateTimeImmutable $updatedAt = null,
         ?DateTimeImmutable $deletedAt = null
-    ) {}
+    ) {
+        $this->id = $id;
+        $this->email = $email;
+        $this->lastName = $lastName;
+        $this->firstName = $firstName;
+        $this->role = $role;
+        $this->createdAt = $createdAt ?? new DateTimeImmutable();
+        $this->updatedAt = $updatedAt;
+        $this->deletedAt = $deletedAt;
+    }
 
     public function id():Id
     {
