@@ -19,7 +19,7 @@
                 </div>
                 <nav class="flex items-center space-x-4">
                     @auth
-                        <span class="text-gray-700">Bonjour, {{ Auth::user()->name }}</span>
+                        <span class="text-gray-700">Bonjour, <b>{{ Auth::user()->lastName }} {{ Auth::user()->firstName }}</b></span>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
@@ -41,7 +41,7 @@
     <!-- Main content -->
     <main class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if(session('success'))
+            <!-- @if(session('success'))
                 <div class="mb-4 p-4 bg-green-100 text-green-800 rounded">
                     {{ session('success') }}
                 </div>
@@ -55,7 +55,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif -->
 
             @yield('content')
         </div>
