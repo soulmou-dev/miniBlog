@@ -71,4 +71,31 @@ final class User
         return $this->deletedAt;
     }
 
+    public function update(
+        LastName $lastName,
+        FirstName $firstName
+    ): void {
+        $this->lastName = $lastName;
+        $this->firstName = $firstName;
+        $this->touch(); // met à jour updatedAt
+    }
+
+
+    public function delete(): void
+    {
+        $this->deletedAt = new DateTimeImmutable();
+        $this->touch(); // met à jour updatedAt
+    }
+
+    public function restore(): void
+    {
+        $this->deletedAt = null;
+        $this->touch(); // met à jour updatedAt
+    }
+
+    public function touch(): void
+    {
+        $this->updatedAt = new DateTimeImmutable();
+    }
+
 }

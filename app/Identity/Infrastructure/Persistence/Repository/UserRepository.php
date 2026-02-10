@@ -16,10 +16,13 @@ final class UserRepository implements UserRepositoryInterface
         private UserMapper $mapper
     ) {}
 
-    public function save(User $user): void
+    public function save(User $user, ?string $hashedPassword = null): void
     {
         $model = UserModel::find($user->id()->value()->toString());
         $model = $this->mapper->toModel($user, $model);
+        if($hashedPassword){
+            $model->password = $hashedPassword;
+        }
         $model->save();
     }
 
@@ -41,6 +44,15 @@ final class UserRepository implements UserRepositoryInterface
         $model = $query->first();
 
         return $model ? $this->mapper->toDomain($model) : null;
+    }
+
+    public function existsByEmail(string|Email $email): bool
+    {
+        $email = $email instanceof Email ? $email->value() : $email;
+
+        return UserModel::query()->where('email', $email)
+                        ->withTrashed()
+                        ->exists();
     }
 
     public function delete(Id $id): void
