@@ -70,7 +70,7 @@ final class UserController extends Controller
 
         $this->commandBus->dispatch($command);
 
-        return redirect()->route('home')
+        return redirect()->route('admin.users.index')
                          ->with('success', 'Utilisateur supprimé avec succès');
     }
 
@@ -80,7 +80,7 @@ final class UserController extends Controller
 
         $this->commandBus->dispatch($command);
 
-        return redirect()->route('home')
+        return redirect()->route('admin.users.index')
                          ->with('success', 'Utilisateur restauré avec succès');
     }
 }
