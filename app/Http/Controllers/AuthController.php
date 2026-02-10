@@ -24,7 +24,12 @@ final class AuthController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|string|min:8'
+            'password' => 'required|string'
+        ],
+        [
+            'email.required' => 'l\'adresse email est requise',
+            'email.email' => 'l\'adresse email n\'est pas valide',
+            'password.required' => 'le mot de passe est requis'
         ]);
 
         $credentials = $request->only('email', 'password');
@@ -57,10 +62,20 @@ final class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => ['required', 'email'],
-            'password' => ['required', 'string', 'min:8'],
-            'password_confirmation' => ['required', 'string', 'min:8'],
-            'firs_name' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:6'],
+            'password_confirmation' => ['required', 'string', 'min:6'],
+            'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
+        ],
+        [
+            'email.required' => 'l\'adresse email est requise',
+            'email.email' => 'l\'adresse email n\'est pas valide',
+            'password.required' => 'le mot de passe est requis',
+            'password.min' => 'la taille du mot de passe doit être minimum 6 caractères',
+            'password_confirmation.required' => 'la confirmation du mot de passe est obligatoire',
+            'password_confirmation.min' => 'la taille du mot de passe confirmé doit être minimum 6 caractères',
+            'first_name.required' => 'le Nom est requis',
+            'last_name.required' => 'le Prénom est requis'
         ]);
 
         if ($validator->fails()) {
