@@ -16,14 +16,6 @@ trait TimestampableTrait
     public const UPDATED_AT = 'updated_at';
     public const DELETED_AT = 'deleted_at';
 
-    /**
-     * On caste les dates (Carbon immutable)
-     */
-    protected $casts = [
-        'created_at' => 'immutable_datetime',
-        'updated_at' => 'immutable_datetime',
-        'deleted_at' => 'immutable_datetime',
-    ];
 
     /**
      * Initialisation les timestamps lors de la création d'une entité
@@ -49,5 +41,17 @@ trait TimestampableTrait
     public function isDeleted(): bool
     {
         return $this->deleted_at !== null;
+    }
+
+    public function getTimestampCasts(): array
+    {
+        /**
+         * On caste les dates (Carbon immutable)
+         */
+        return  [
+            'created_at' => 'immutable_datetime',
+            'updated_at' => 'immutable_datetime',
+            'deleted_at' => 'immutable_datetime',
+        ];
     }
 }

@@ -14,6 +14,8 @@ final class UserModel extends Authenticatable
       /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $table = 'users';
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -43,7 +45,7 @@ final class UserModel extends Authenticatable
     protected function casts(): array
     {
         // on merge avec les cats déclarés dansle Trait TimestampableTrait
-        return array_merge( $this->casts,[ 'password' => 'hashed']);
+        return array_merge( $this->getTimestampCasts(),[ 'password' => 'hashed']);
     }
 }
 
