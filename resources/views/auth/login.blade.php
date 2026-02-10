@@ -28,7 +28,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('login.post') }}" class="space-y-4">
+    <form method="POST" action="{{ route('login') }}" class="space-y-4">
         @csrf
 
         <!-- Email -->
@@ -63,7 +63,7 @@
 
         <!-- Lien vers register -->
         <div class="text-center text-gray-600 mt-4">
-            Vous êtes déjà inscrit ? <a href="{{ route('register.form') }}" class="text-green-500 hover:text-green-700">S’inscrire</a>
+            Vous n'êtes pas encore inscrit ? <a href="{{ route('register.form') }}" class="text-blue-500 hover:text-blue-700">S’inscrire</a>
         </div>
     </form>
 </div>
