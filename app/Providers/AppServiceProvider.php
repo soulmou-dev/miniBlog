@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Blog\Domain\Repository\ArticleRepositoryInterface;
+use App\Blog\Infrastructure\Persistence\Repository\ArticleRepository;
 use App\Identity\Application\Security\PasswordHasherInterface;
 use App\Identity\Domain\Repository\UserRepositoryInterface;
 use App\Identity\Infrastructure\Persistence\Repository\UserRepository;
@@ -38,6 +40,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
         UserRepositoryInterface::class,
         UserRepository::class
+        );
+
+        $this->app->bind(
+        ArticleRepositoryInterface::class,
+        ArticleRepository::class
         );
     }
 
