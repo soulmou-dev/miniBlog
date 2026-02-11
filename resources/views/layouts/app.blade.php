@@ -35,6 +35,52 @@
                 </nav>
             </div>
         </div>
+
+        @auth
+            <nav class="bg-gray-800">
+                <div class="max-w-7xl mx-auto px-6">
+                    <ul class="flex mx-2 space-x-6 py-3 text-sm">
+                        <li>
+                            <a href="{{ route('users.profile') }}"
+                            class="text-gray-300 hover:text-white transition">
+                                Mon profil
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('articles.index') }}"
+                            class="text-gray-300 hover:text-white transition">
+                                Mes articles
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('articles.new') }}"
+                            class="text-gray-300 hover:text-white transition">
+                                Nouvel article
+                            </a>
+                        </li>
+
+                        @if(auth()->user()->isAdmin())
+                            <li>
+                                <a href="{{ route('admin.users.index') }}"
+                                class="text-yellow-400 hover:text-yellow-300 transition font-semibold">
+                                    Utilisateurs
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.articles.index') }}"
+                                class="text-yellow-400 hover:text-yellow-300 transition font-semibold">
+                                    Gestion des articles
+                                </a>
+                            </li>
+                        @endif
+
+                    </ul>
+                </div>
+            </nav>
+        @endauth
+
     </header>
 
     <!-- Main content -->
