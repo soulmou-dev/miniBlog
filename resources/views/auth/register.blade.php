@@ -11,6 +11,12 @@
         </div>
     @endif
 
+    @if(session('error'))
+        <div class="mb-4 p-4 bg-red-100 text-red-800 rounded">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <!-- Erreurs de validation -->
     @if($errors->any())
         <div class="mb-4 p-4 bg-red-100 text-red-800 rounded">

@@ -22,7 +22,7 @@ Route::post('/register', [AuthController::class, 'register'])
     ->name('register');
 
 // routes pour UserController
-Route::get('/users/{id}', [UserController::class, 'show'])
+Route::get('/users/{id}/profile', [UserController::class, 'show'])
     ->name('users.show');
 
 //routes pour blogController
@@ -39,10 +39,10 @@ Route::middleware('auth')->group( function() {
     Route::post('/logout', [AuthController::class, 'logout'])
         ->name('logout');
     //routes pour UserController
-    Route::get('/users/profile/edit', [UserController::class, 'edit'])
-        ->name('users.profile.edit');
     Route::get('/users/profile', [UserController::class, 'myProfile'])
         ->name('users.profile');
+    Route::get('/users/profile/edit', [UserController::class, 'edit'])
+        ->name('users.profile.edit');
     Route::patch('/users/profile', [UserController::class, 'updateUser'])
         ->name('users.profile.update');
    
