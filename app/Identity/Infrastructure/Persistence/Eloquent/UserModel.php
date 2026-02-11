@@ -2,8 +2,10 @@
 
 namespace App\Identity\Infrastructure\Persistence\Eloquent;
 
+use App\Blog\Infrastructure\Persistence\Eloquent\ArticleModel;
 use App\Shared\Infrastructure\Persistence\Eloquent\Trait\TimestampableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -44,6 +46,20 @@ final class UserModel extends Authenticatable
     public function isAdmin(){
         return $this->role === 'ROLE_ADMIN';
     }
+
+    public function isDeleted(){
+        return $this->deleted_at !== null;
+    }
+    
+    public function status(){
+        return $this->deleted_at ? 'supprimé' : 'actif' ;
+    }
+
+    public function articles(): HasMany
+    {
+        return $this->hasMany(ArticleModel::class, 'user_id');
+    }
+
     /**
      * Get the attributes that should be cast.
      *

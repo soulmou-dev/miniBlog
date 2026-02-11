@@ -21,7 +21,7 @@ final class ShowArticleByIdHandler
             throw new ArticleNotFoundException();
         }
         if($article->status === ArticleStatus::DELETED->value){
-            if($connectedUser === null OR $connectedUser['role'] !== 'ROLE_ADMIN'){
+            if($connectedUser === null || $connectedUser['role'] !== 'ROLE_ADMIN'){
                throw new ArticleNotFoundException(); 
             }
         }

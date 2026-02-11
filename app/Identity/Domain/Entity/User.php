@@ -81,6 +81,7 @@ final class User
     }
 
     public function update(
+        Email $email,
         LastName $lastName,
         FirstName $firstName
     ): void {

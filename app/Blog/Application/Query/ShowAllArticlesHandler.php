@@ -5,7 +5,7 @@ namespace App\Blog\Application\Query;
 use App\Blog\Infrastructure\Persistence\Eloquent\ArticleModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
-final class ShowAllArticleHandler
+final class ShowAllArticlesHandler
 {
     public function __invoke(?array $connectedUser = null): ?Collection
     {
