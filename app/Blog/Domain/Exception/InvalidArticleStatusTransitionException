@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Blog\Domain\Exception;
+
+use App\Shared\Domain\Exception\AbstractDomainException;
+
+final class InvalidArticleStatusTransitionException extends AbstractDomainException
+{
+    private const DEFAULT_MESSAGE = 'Transition de statut de l\article non autorisée.';
+    private const DEFAULT_CODE_ERROR = 'INVALID_ARTICLE_STATUS_TRANSITION';
+    private const DEFAULT_REASON = 'CONFLICT';
+
+    public function __construct(string $message = self::DEFAULT_MESSAGE)
+    {
+        parent::__construct(
+            $message,
+            self::DEFAULT_CODE_ERROR,
+            self::DEFAULT_REASON
+        );
+    }
+}
