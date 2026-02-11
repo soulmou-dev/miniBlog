@@ -6,7 +6,7 @@
     <div class="max-w-6xl mx-auto bg-white shadow-lg rounded-2xl p-8">
 
         <h1 class="text-2xl font-bold text-gray-800 mb-6">
-            Gestion des Articles
+            Mes Articles
         </h1>
 
         <div class="overflow-x-auto">
@@ -15,7 +15,7 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Titre</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Auteur</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Crée le</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Statut</th>
                         <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
                     </tr>
@@ -31,7 +31,7 @@
                         </td>
 
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {{ $article->authorName }}
+                            {{ $article->created_at->format('d/m/Y H:i') }}
                         </td>
 
                         <td class="px-6 py-4 whitespace-nowrap text-sm">
@@ -43,7 +43,7 @@
                                 <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
                                     Approuvé
                                 </span>
-                            @elseif($article->status === 'approved')
+                            @elseif($article->status === 'published')
                                 <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
                                     Publié
                                 </span>

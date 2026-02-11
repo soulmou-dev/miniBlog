@@ -36,7 +36,16 @@
 
         {{-- Informations --}}
         <div class="flex items-center text-gray-500 text-sm mb-6 space-x-4">
-            <span><span class="font-bold">Auteur : </span>{{ $article->authorName ?? 'Inconnu' }}</span>
+            <span>
+                <span class="font-bold">Auteur : </span>
+                @if($article->authorName)
+                    <a class="text-blue-700 hover:underline transition" href="{{ route('users.show', $article->user_id) }}">
+                        {{ $article->authorName  }}
+                    </a>
+                @else
+                    'Inconnu'
+                @endif     
+            </span>
             @if($article->published_at)
                 <span><span class="font-bold">Publié le : </span>{{ $article->published_at->format('d/m/Y H:i') }}</span>
             @endif
