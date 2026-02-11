@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Blog\Application\Command\ApproveArticleCommand;
 use App\Blog\Application\Command\CreateArticleCommand;
 use App\Blog\Application\Command\DeleteArticleCommand;
 use App\Blog\Application\Command\PublishArticleCommand;
-use App\Blog\Application\Command\RejectArticleCommand;
-use App\Blog\Application\Command\RestoreArticleCommand;
 use App\Blog\Application\Command\UnpublishArticleCommand;
-use App\Blog\Application\Command\UpdateArticleCommand;
 use App\Blog\Application\Query\GetArticleByIdHandler;
+use App\Blog\Application\Query\ShowAllPublishedArticlesHandler;
 use App\Blog\Application\Query\ShowArticleByIdHandler;
+use App\Blog\Application\Query\ShowMyArticlesHandler;
 use App\Shared\Domain\Bus\CommandBus;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Throwable;
+use Illuminate\Support\Str;
 
 final class BlogController extends Controller
 {
@@ -29,7 +27,21 @@ final class BlogController extends Controller
 
     public function home(): View
     {
-        return view('blog.home');
+      
+        $articles = app(ShowAllPublishedArticlesHandler::class)();
+        
+        return view('blog.home', [
+            'articles' => $articles
+        ]);
+    }
+
+    public function index(): View
+    {
+        $userId = Auth::id();
+        $articles = app(ShowMyArticlesHandler::class)($userId);
+        return view('blog.article.index', [
+            'articles' => $articles
+        ]); 
     }
 
     public function new(): View

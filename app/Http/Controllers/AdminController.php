@@ -4,21 +4,16 @@ namespace App\Http\Controllers;
 
 
 use App\Blog\Application\Command\ApproveArticleCommand;
-use App\Blog\Application\Command\CreateArticleCommand;
-use App\Blog\Application\Command\DeleteArticleCommand;
-use App\Blog\Application\Command\PublishArticleCommand;
 use App\Blog\Application\Command\RejectArticleCommand;
 use App\Blog\Application\Command\RestoreArticleCommand;
-use App\Blog\Application\Command\UnpublishArticleCommand;
-use App\Blog\Application\Command\UpdateArticleCommand;
-use App\Blog\Application\Query\GetArticleByIdHandler;
-use App\Blog\Application\Query\ShowAllArticleHandler;
-use App\Blog\Application\Query\ShowArticleByIdHandler;
+use App\Blog\Application\Query\ShowAllArticlesHandler;
+use App\Identity\Application\Command\DeleteUserCommand;
+use App\Identity\Application\Command\RestoreUserCommand;
+use App\Identity\Application\Query\ShowAllUsersHandler;
 use App\Shared\Domain\Bus\CommandBus;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Throwable;
 
@@ -28,6 +23,45 @@ final class AdminController extends Controller
         private CommandBus $commandBus
     ) {}
     
+    public function UserIndex(): View
+    {
+        $users = app(ShowAllUsersHandler::class)();
+        
+        return view('admin.user.index', [
+            'users' => $users
+        ]);
+    }
+
+    public function deleteUser(Request $request, string $id): RedirectResponse
+    {  
+        $data = [];
+        $data['id'] = $id;
+        $data['authorId'] = Auth::id();
+        $data['role'] = Auth::user()->role;
+        
+        $command = DeleteUserCommand::fromData($data);
+
+        $this->commandBus->dispatch($command);
+        
+        return redirect()->back()
+                         ->with('success', 'L\'utilisateur a été supprimé avec succèss');
+    }
+
+    public function restoreUser(Request $request, string $id): RedirectResponse
+    {  
+        $data = [];
+        $data['id'] = $id;
+        $data['authorId'] = Auth::id();
+        $data['role'] = Auth::user()->role;
+        
+        $command = RestoreUserCommand::fromData($data);
+
+        $this->commandBus->dispatch($command);
+        
+        return redirect()->back()
+                         ->with('success', 'L\'utilisateur a été restauré avec succèss');
+    }
+
     public function ArticleIndex(): View
     {
         $connectedUser = null;
@@ -37,9 +71,9 @@ final class AdminController extends Controller
                 'role' => Auth::user()->role
             ];
         }
-        $articles = app(ShowAllArticleHandler::class)($connectedUser);
+        $articles = app(ShowAllArticlesHandler::class)($connectedUser);
         
-        return view('blog.article.index', [
+        return view('admin.article.index', [
             'articles' => $articles
         ]);
     }

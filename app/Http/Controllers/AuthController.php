@@ -63,7 +63,7 @@ final class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => ['required', 'email'],
             'password' => ['required', 'string', 'min:6'],
-            'password_confirmation' => ['required', 'string', 'min:6'],
+            'password_confirmation' => ['required', 'string'],
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
         ],
@@ -73,7 +73,6 @@ final class AuthController extends Controller
             'password.required' => 'le mot de passe est requis',
             'password.min' => 'la taille du mot de passe doit être minimum 6 caractères',
             'password_confirmation.required' => 'la confirmation du mot de passe est obligatoire',
-            'password_confirmation.min' => 'la taille du mot de passe confirmé doit être minimum 6 caractères',
             'first_name.required' => 'le Nom est requis',
             'last_name.required' => 'le Prénom est requis'
         ]);
