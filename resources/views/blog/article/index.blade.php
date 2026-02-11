@@ -60,7 +60,7 @@
 
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                             <a href="{{ route('articles.show', $article->id) }}"
-                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                                class="px-2 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
                                 Afficher
                             </a>
                         </td>
