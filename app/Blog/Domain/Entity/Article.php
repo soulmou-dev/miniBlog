@@ -111,7 +111,7 @@ final class Article
     public function restore(): void
     {
         if($this->isDeleted()===false){
-            throw new InvalidArticleStatusTransitionException(message: 'L\'article n\'est pas supprimé');
+            throw new InvalidArticleStatusTransitionException('L\'article n\'est pas supprimé');
         }
 
         if($this->isPublished()){

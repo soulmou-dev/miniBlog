@@ -6,7 +6,7 @@ namespace App\Blog\Infrastructure\Persistence\Repository;
 use App\Blog\Domain\Entity\Article;
 use App\Blog\Domain\Repository\ArticleRepositoryInterface;
 use App\Blog\Infrastructure\Mapper\ArticleMapper;
-use App\Identity\Infrastructure\Persistence\Eloquent\ArticleModel;
+use App\Blog\Infrastructure\Persistence\Eloquent\ArticleModel;
 use App\Shared\Domain\ValueObject\Email;
 use App\Shared\Domain\ValueObject\Id;
 

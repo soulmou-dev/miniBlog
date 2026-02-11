@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Identity\Infrastructure\Persistence\Eloquent;
+namespace App\Blog\Infrastructure\Persistence\Eloquent;
 
+use App\Identity\Infrastructure\Persistence\Eloquent\UserModel;
 use App\Shared\Infrastructure\Persistence\Eloquent\Trait\TimestampableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,7 @@ final class ArticleModel extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $cats = [
+    protected $casts = [
         'user_id' => 'string',
         'published_at' => 'immutable_datetime',
     ];
@@ -49,7 +50,7 @@ final class ArticleModel extends Model
      */
     public function user(): mixed
     {
-        return $this->belongsToUser(UserModel::class);
+        return $this->belongsTo(UserModel::class);
     }
 
     /**

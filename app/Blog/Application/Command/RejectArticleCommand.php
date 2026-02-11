@@ -2,7 +2,7 @@
 
 namespace App\Blog\Application\Command;
 
-final class DeleteArticleCommand
+final class RejectArticleCommand
 {
     public function __construct(
         public readonly string $id,

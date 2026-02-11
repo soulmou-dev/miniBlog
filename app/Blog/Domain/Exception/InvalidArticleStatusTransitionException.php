@@ -8,7 +8,7 @@ final class InvalidArticleStatusTransitionException extends AbstractDomainExcept
 {
     private const DEFAULT_MESSAGE = 'Transition de statut de l\article non autorisée.';
     private const DEFAULT_CODE_ERROR = 'INVALID_ARTICLE_STATUS_TRANSITION';
-    private const DEFAULT_REASON = 'CONFLICT';
+    private const DEFAULT_REASON = 'CONFLIT';
 
     public function __construct(string $message = self::DEFAULT_MESSAGE)
     {
