@@ -50,17 +50,17 @@ final class User
         return $this->lastName;
     }
 
-    public function firstName(): ?FirstName
+    public function firstName(): FirstName
     {
         return $this->firstName;
     }
 
-    public function email(): ?Email
+    public function email(): Email
     {
         return $this->email;
     }
 
-    public function role(): ?UserRole
+    public function role(): UserRole
     {
         return $this->role;
     }
