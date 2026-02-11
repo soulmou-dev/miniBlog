@@ -28,7 +28,7 @@ Route::get('/users/{id}/profile', [UserController::class, 'show'])
 //routes pour blogController
 Route::get('/', [BlogController::class, 'home'])
     ->name('home');
-Route::get('/articles/{id}', [BlogController::class, 'show'])
+Route::get('/articles/{id}/show', [BlogController::class, 'show'])
     ->name('articles.show');
 
 /**
