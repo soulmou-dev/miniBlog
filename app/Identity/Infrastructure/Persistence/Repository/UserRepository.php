@@ -18,7 +18,7 @@ final class UserRepository implements UserRepositoryInterface
 
     public function save(User $user, ?string $hashedPassword = null): void
     {
-        $model = UserModel::find($user->id()->value()->toString());
+        $model = UserModel::withTrashed()->find($user->id()->value()->toString());
         $model = $this->mapper->toModel($user, $model);
         if($hashedPassword){
             $model->password = $hashedPassword;
