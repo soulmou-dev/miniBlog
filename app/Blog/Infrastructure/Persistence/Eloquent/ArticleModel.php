@@ -19,7 +19,8 @@ final class ArticleModel extends Model
     public $incrementing = false;
 
     protected $cats = [
-        'user_id' => 'string'
+        'user_id' => 'string',
+        'published_at' => 'immutable_datetime',
     ];
     
     /**

@@ -1,43 +1,42 @@
 <?php
 
-namespace App\Identity\Infrastructure\Persistence\Repository;
+namespace App\Blog\Infrastructure\Persistence\Repository;
 
-use App\Identity\Domain\Repository\UserRepositoryInterface;
-use App\Identity\Domain\Entity\User;
-use App\Identity\Infrastructure\Mapper\UserMapper;
-use App\Identity\Infrastructure\Persistence\Eloquent\UserModel;
+
+use App\Blog\Domain\Entity\Article;
+use App\Blog\Domain\Repository\ArticleRepositoryInterface;
+use App\Blog\Infrastructure\Mapper\ArticleMapper;
+use App\Identity\Infrastructure\Persistence\Eloquent\ArticleModel;
 use App\Shared\Domain\ValueObject\Email;
 use App\Shared\Domain\ValueObject\Id;
 
-final class UserRepository implements UserRepositoryInterface
+final class ArticleRepository implements ArticleRepositoryInterface
 {
 
     public function __construct(
-        private UserMapper $mapper
+        private ArticleMapper $mapper
     ) {}
 
-    public function save(User $user, ?string $hashedPassword = null): void
+    public function save(Article $article): void
     {
-        $model = UserModel::find($user->id()->value()->toString());
-        $model = $this->mapper->toModel($user, $model);
-        if($hashedPassword){
-            $model->password = $hashedPassword;
-        }
+        $model = ArticleModel::withTrashed()->find($article->id()->value()->toString());
+        $model = $this->mapper->toModel($article, $model);
+       
         $model->save();
     }
 
-    public function findById(Id $id, ?bool $includeDeleted = false): ?User
+    public function findById(Id $id, ?bool $includeDeleted = false): ?Article
     {   
-        $query = $includeDeleted ? UserModel::query()->withTrashed() :  UserModel::query();
+        $query = $includeDeleted ? ArticleModel::query()->withTrashed() :  ArticleModel::query();
         $model = $query->findOrFail($id->value()->toString());
 
         return $model ? $this->mapper->toDomain($model) : null;
     }
-    public function findOneByEmail(string|Email $email, ?bool $includeDeleted = false): ?User
+    public function findOneByEmail(string|Email $email, ?bool $includeDeleted = false): ?Article
     {
         $email = $email instanceof Email ? $email->value() : $email;
 
-        $query =  UserModel::query()->where('email', $email);
+        $query =  ArticleModel::query()->where('email', $email);
         if($includeDeleted){
             $query->withTrashed();
         }    
@@ -46,18 +45,9 @@ final class UserRepository implements UserRepositoryInterface
         return $model ? $this->mapper->toDomain($model) : null;
     }
 
-    public function existsByEmail(string|Email $email): bool
-    {
-        $email = $email instanceof Email ? $email->value() : $email;
-
-        return UserModel::query()->where('email', $email)
-                        ->withTrashed()
-                        ->exists();
-    }
-
     public function delete(Id $id): void
     {
-        $model = UserModel::find($id->value()->toString());
+        $model = ArticleModel::find($id->value()->toString());
         if($model){
             $model->delete();
         }
@@ -65,7 +55,7 @@ final class UserRepository implements UserRepositoryInterface
 
     public function restore(Id $id): void
     {
-        $model = UserModel::query()->where('id', $id->value()->toString())->withTrashed();
+        $model = ArticleModel::query()->where('id', $id->value()->toString())->withTrashed();
         if($model){
             $model->restore();
         }
