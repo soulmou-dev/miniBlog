@@ -41,7 +41,9 @@ final class UserModel extends Authenticatable
         'remember_token',
     ];
 
-
+    public function isAdmin(){
+        return $this->role === 'ROLE_ADMIN';
+    }
     /**
      * Get the attributes that should be cast.
      *
